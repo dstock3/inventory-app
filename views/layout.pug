@@ -2,6 +2,19 @@ doctype html
 html
   head
     title= title
+    link(rel='stylesheet', href='/stylesheets/reset.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
-    block content
+    header
+      div(class="logo")
+      div(class="search")
+      button(aria-label="View Cart." class="view-cart-button")
+    main
+      block content
+    footer
+      div(class="attribution")
+        p Created By David Stockdale
+      div(class="social-links")
+        a(href="") Github
+        a(href="") Portfolio
+
