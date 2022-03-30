@@ -1,12 +1,26 @@
-var Item = require('../models/item');
+const Item = require('../models/item');
+const Category = require('../models/category');
+const async = require('async');
 
 exports.index = function(req, res) {
-    res.send('NOT IMPLEMENTED: Site Home Page');
+    Item.find({}, 'name description price stock')
+    .populate('name')
+    .populate('description')
+    .populate('price')
+    .populate('stock')
+    .exec(function (err, list_items) {
+      if (err) { return next(err); }
+      //Successful, so render
+      res.render('index', { title: 'Item List', item_list: list_items });
+    });
 };
+
+
 
 // Display list of all Items.
 exports.item_list = function(req, res) {
-    res.send('NOT IMPLEMENTED: Item list');
+
+
 };
 
 // Display detail page for a specific Item.
