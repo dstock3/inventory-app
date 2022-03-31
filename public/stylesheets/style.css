@@ -24,15 +24,26 @@ main {
 .main-subcontainer {
   display: flex;
   flex-direction: column;
-  width: 75%;
+  width: 80%;
 }
 
 .sidebar {
-  width: 20%;
+  width: 15%;
   height: fit-content;
   border: 2px solid black;
   border-radius: 15px;
+  text-align: center;
+}
 
+.cat-header {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  font-size: 1.5em;
+}
+
+.category-line-item {
+  font-size: 1.25em;
+  margin-bottom: 15px;
 }
 
 .title {

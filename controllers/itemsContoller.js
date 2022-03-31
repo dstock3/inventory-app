@@ -1,22 +1,6 @@
 const Item = require('../models/item');
 const Category = require('../models/category');
 const async = require('async');
-/*
-exports.index = function(req, res) {
-    Item.find({}, 'name description category price stock')
-    .populate('name')
-    .populate('description')
-    .populate('category')
-    .populate('price')
-    .populate('stock')
-    .exec(function (err, list_items) {
-      if (err) { return next(err); }
-      //Successful, so render
-      res.render('index', { title: 'Item List', item_list: list_items });
-    });
-    
-};
-*/
 
 exports.index = function(req, res, next) {
     async.parallel({
@@ -45,12 +29,23 @@ exports.index = function(req, res, next) {
 // Display list of all Items.
 exports.item_list = function(req, res) {
 
-
 };
 
 // Display detail page for a specific Item.
-exports.item_detail = function(req, res) {
-    res.send('NOT IMPLEMENTED: Item detail: ' + req.params.id);
+exports.item_detail = function(req, res, next) {
+    async.parallel({
+        item: function(callback) {
+            Item.findById(req.params.id)
+            .exec(callback)
+        },
+        category: function(callback) {
+            Category.find({ 'category': req.params.id },'name')
+            .exec(callback)
+        }
+    }, function(err, results) {
+        if (err) { return next(err); } 
+        res.render('item_detail', { title: 'Product Detail', item: results.item, category: results.category } );
+    })
 };
 
 // Display Item create form on GET.

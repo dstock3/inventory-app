@@ -17,7 +17,9 @@ block content
             p #{item.category.name}
 
 block sidebar
-  ul(class="sidebar")
-    each cat in category_list
-      li(class="category-line-item") 
-        a(href=cat.url) #{cat.name}
+  div(class="sidebar")
+    h3(class="cat-header") Categories
+    ul
+      each cat in category_list
+        li(class="category-line-item") 
+          a(href=cat.url) #{cat.name}
