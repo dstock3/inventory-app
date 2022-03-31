@@ -30,7 +30,12 @@ exports.index = function(req, res, next) {
 exports.item_detail = function(req, res, next) {
     async.parallel({
         item: function(callback) {
-            Item.findById(req.params.id)
+            Item.findById(req.params.id, 'name description category price stock')
+                .populate('name')
+                .populate('description')
+                .populate('category')
+                .populate('price')
+                .populate('stock')
                 .exec(callback)
         },
         category: function(callback) {
@@ -39,7 +44,7 @@ exports.item_detail = function(req, res, next) {
         }
     }, function(err, results) {
         if (err) { return next(err); } 
-        res.render('item_detail', { title: 'Product Detail', item: results.item, category: results.category } );
+        res.render('item_detail', { title: 'Product Detail', item: results.item, category_list: results.category } );
     })
 };
 
