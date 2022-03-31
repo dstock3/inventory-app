@@ -15,6 +15,11 @@ exports.category_detail = function(req, res) {
                 .populate('name')
                 .exec(callback)
         },
+        list_categories: function(callback) {
+            Category.find({}, 'name')
+                .populate('name')
+                .exec(callback)
+        },
         list_items: function(callback) {
             Item.find({}, 'name description category price stock')
                 .populate('name')
@@ -26,7 +31,7 @@ exports.category_detail = function(req, res) {
         }
     }, function(err, results) {
         if (err) { return next(err); }
-        res.render('category_detail', { title: results.category.name, item_list: results.list_items })
+        res.render('category_detail', { title: results.category.name, category_list: results.list_categories, item_list: results.list_items })
     })
 };
 
