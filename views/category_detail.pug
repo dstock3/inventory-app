@@ -1,0 +1,8 @@
+extends layout
+
+block content
+    h2 #{title}
+    div(class="item-container")
+        each item in item_list
+            if title === item.category.name
+                div #{item.name}

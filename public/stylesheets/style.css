@@ -41,9 +41,13 @@ main {
   font-size: 1.5em;
 }
 
-.category-line-item {
+.cat-line-item {
   font-size: 1.25em;
   margin-bottom: 15px;
+}
+
+.cat-anchor {
+  text-decoration: none;
 }
 
 .title {

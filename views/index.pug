@@ -21,5 +21,5 @@ block sidebar
     h3(class="cat-header") Categories
     ul
       each cat in category_list
-        li(class="category-line-item") 
-          a(href=cat.url) #{cat.name}
+        li(class="cat-line-item") 
+          a(href=cat.url class="cat-anchor") #{cat.name}
