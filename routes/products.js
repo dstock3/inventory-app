@@ -11,30 +11,28 @@ const category_controller = require('../controllers/categoryController');
 router.get('/', items_controller.index);
 
 // GET request for creating an item. 
-router.get('/products/create', items_controller.item_create_get);
+router.get('/item/create', items_controller.item_create_get);
 
 // POST request for creating item.
-router.post('/products/create', items_controller.item_create_post);
+router.post('/item/create', items_controller.item_create_post);
 
 // GET request to delete item.
-router.get('/products/:id/delete', items_controller.item_delete_get);
+router.get('/item/:id/delete', items_controller.item_delete_get);
 
 // POST request to delete item.
-router.post('/products/:id/delete', items_controller.item_delete_post);
+router.post('/item/:id/delete', items_controller.item_delete_post);
 
 // GET request to update item.
-router.get('/products/:id/update', items_controller.item_update_get);
+router.get('/item/:id/update', items_controller.item_update_get);
 
 // POST request to update item.
-router.post('/products/:id/update', items_controller.item_update_post);
+router.post('/item/:id/update', items_controller.item_update_post);
 
 // GET request for one item.
-router.get('/products/:id', items_controller.item_detail);
+router.get('/item/:id', items_controller.item_detail);
 
 // GET request for list of all items.
-router.get('/products', items_controller.item_list);
-
-
+router.get('/items', items_controller.item_list);
 
 /// CATEGORY ROUTES ///
 

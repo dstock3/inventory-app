@@ -26,26 +26,26 @@ exports.index = function(req, res, next) {
     });
 };
 
-// Display list of all Items.
-exports.item_list = function(req, res) {
-
-};
-
 // Display detail page for a specific Item.
 exports.item_detail = function(req, res, next) {
     async.parallel({
         item: function(callback) {
             Item.findById(req.params.id)
-            .exec(callback)
+                .exec(callback)
         },
         category: function(callback) {
             Category.find({ 'category': req.params.id },'name')
-            .exec(callback)
+                .exec(callback)
         }
     }, function(err, results) {
         if (err) { return next(err); } 
         res.render('item_detail', { title: 'Product Detail', item: results.item, category: results.category } );
     })
+};
+
+// Display list of all Items.
+exports.item_list = function(req, res) {
+
 };
 
 // Display Item create form on GET.
