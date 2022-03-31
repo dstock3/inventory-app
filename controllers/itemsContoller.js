@@ -1,7 +1,7 @@
 const Item = require('../models/item');
 const Category = require('../models/category');
 const async = require('async');
-
+/*
 exports.index = function(req, res) {
     Item.find({}, 'name description category price stock')
     .populate('name')
@@ -16,10 +16,31 @@ exports.index = function(req, res) {
     });
     
 };
+*/
 
+exports.index = function(req, res, next) {
+    async.parallel({
+        list_items: function(callback) {
+            Item.find({}, 'name description category price stock')
+            .populate('name')
+            .populate('description')
+            .populate('category')
+            .populate('price')
+            .populate('stock')
+            .exec(callback)
 
-
-
+        },
+        list_categories: function(callback) {
+            Category.find({}, 'name')
+            .populate('name')
+            .exec(callback)
+        },
+    }, function(err, results) {
+        if (err) { return next(err); } // Error in API usage.
+        // Successful, so render.
+        res.render('index', { title: 'Products', item_list: results.list_items, category_list: results.list_categories } );
+    });
+};
 
 // Display list of all Items.
 exports.item_list = function(req, res) {

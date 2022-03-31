@@ -17,7 +17,8 @@ main {
   justify-content: space-between;
   margin: auto;
   width: 95vw;
-
+  margin-top: 15px;
+  margin-bottom: 10px;
 }
 
 .main-subcontainer {
@@ -28,11 +29,13 @@ main {
 
 .sidebar {
   width: 20%;
+  height: fit-content;
   border: 2px solid black;
+  border-radius: 15px;
 
 }
 
-.subtitle {
+.title {
   font-weight: bold;
   font-size: 2em;
   margin: auto;

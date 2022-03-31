@@ -65,6 +65,9 @@ function createCategories(cb) {
       function(callback) {
         categoryCreate("Beverages", callback);
       },
+      function(callback) {
+        categoryCreate("Frozen", callback);
+      },
       ],
       // optional callback
       cb);
@@ -104,6 +107,30 @@ function createItems(cb) {
         },
         function(callback) {
           itemCreate('Turkey Bacon', '12 oz', categories[2], 2.75, 4, callback);
+        },
+        function(callback) {
+          itemCreate('Drumstick Dairy Dessert', '8 ct', categories[4], 7.15, 14, callback);
+        },
+        function(callback) {
+          itemCreate('Tamales, Pork in Red Sauce', '24 oz', categories[4], 8.25, 28, callback);
+        },
+        function(callback) {
+          itemCreate('Three Meat Pizza Rising Crust', '29.8 oz', categories[4], 3.29, 53, callback);
+        },
+        function(callback) {
+          itemCreate('Tracks Ice Cream', '48 fl oz', categories[4], 2.15, 3, callback);
+        },
+        function(callback) {
+          itemCreate('Nonfat Plain Greek Yogurt', '32 oz', categories[1], 3.75, 18, callback);
+        },
+        function(callback) {
+          itemCreate('Kombucha', '16 fl oz', categories[3], 2.75, 5, callback);
+        },
+        function(callback) {
+          itemCreate('Avocado', 'per lb', categories[0], 1.25, 65, callback);
+        },
+        function(callback) {
+          itemCreate('93% Ground Beef', 'per lb', categories[2], 6.95, 18, callback);
         },
         ],
         // optional callback
