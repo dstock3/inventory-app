@@ -3,9 +3,10 @@ const Category = require('../models/category');
 const async = require('async');
 
 exports.index = function(req, res) {
-    Item.find({}, 'name description price stock')
+    Item.find({}, 'name description category price stock')
     .populate('name')
     .populate('description')
+    .populate('category')
     .populate('price')
     .populate('stock')
     .exec(function (err, list_items) {
@@ -13,7 +14,10 @@ exports.index = function(req, res) {
       //Successful, so render
       res.render('index', { title: 'Item List', item_list: list_items });
     });
+    
 };
+
+
 
 
 

@@ -13,10 +13,23 @@ header {
 }
 
 main {
+  display: flex;
+  justify-content: space-between;
   margin: auto;
-  width: 75vw;
+  width: 95vw;
+
+}
+
+.main-subcontainer {
   display: flex;
   flex-direction: column;
+  width: 75%;
+}
+
+.sidebar {
+  width: 20%;
+  border: 2px solid black;
+
 }
 
 .subtitle {
@@ -36,7 +49,7 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  width: 300px;
+  width: 250px;
   height: 250px;
   padding: 15px;
   border: 2px solid black;
