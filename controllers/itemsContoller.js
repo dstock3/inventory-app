@@ -69,15 +69,15 @@ exports.item_create_post = [
     //convert the category into an array
 
     (req, res, next) => {
-        if(!(req.body.genre instanceof Array)){
+        if(!(req.body.category instanceof Array)){
             if(typeof req.body.category ==='undefined')
             req.body.category = [];
             else
-            req.body.category = new Array(req.body.genre);
+            req.body.category = new Array(req.body.category);
         }
         next();
     },
-    
+
     //form validation
     body('name', 'Item name required').trim().isLength({ min: 1 }).escape(),
     body('description', 'Item description must not be empty. Please enter a desciption for this item.').trim().isLength({ min: 1 }).escape(),
@@ -85,7 +85,39 @@ exports.item_create_post = [
     body('stock', 'Item amount must not be empty. Please enter the amount of this item in your inventory.').trim().isLength({ min: 1 }).escape(),
     body('category.*').escape(),
 
-    
+    (req, res, next) => {
+        const errors = validationResult(req);
+
+        //create new Item object with the trimmed form data
+        let item = new Item({ 
+            name: req.body.name,
+            description: req.body.description,
+            category: req.body.category,
+            price: req.body.price,
+            stock: req.body.stock
+        });
+
+        if (!errors.isEmpty()) {
+            Category.find()
+            .populate('name')
+            .exec(function (err, list_categories) {
+                if (err) { return next(err); }
+                for (let i = 0; i < list_categories.length; i++) {
+                    if (item.category.indexOf(list_categories[i]._id) > -1) {
+                        list_categories[i].checked='true';
+                    }
+                }
+                // Successful, so render
+                res.render('item_form', { title: 'Create Item', category_list: list_categories })
+                });
+
+        } else {
+            item.save(function (err) {
+                if (err) { return next(err); }
+                res.redirect(item.url);
+            });
+        }
+    }
 ];
 
 // Display Item delete form on GET.
