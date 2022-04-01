@@ -66,6 +66,25 @@ exports.item_create_get = function(req, res, next) {
 
 // Handle Item create on POST.
 exports.item_create_post = [
+    //convert the category into an array
+
+    (req, res, next) => {
+        if(!(req.body.genre instanceof Array)){
+            if(typeof req.body.category ==='undefined')
+            req.body.category = [];
+            else
+            req.body.category = new Array(req.body.genre);
+        }
+        next();
+    },
+    
+    //form validation
+    body('name', 'Item name required').trim().isLength({ min: 1 }).escape(),
+    body('description', 'Item description must not be empty. Please enter a desciption for this item.').trim().isLength({ min: 1 }).escape(),
+    body('price', 'Item price must not be empty. Please enter the retail price of this item.').trim().isLength({ min: 1 }).escape(),
+    body('stock', 'Item amount must not be empty. Please enter the amount of this item in your inventory.').trim().isLength({ min: 1 }).escape(),
+    body('category.*').escape(),
+
     
 ];
 
