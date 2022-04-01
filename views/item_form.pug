@@ -8,8 +8,14 @@ block content
       input#name.form-control(type='text' placeholder='Item Name' name='name' required='true' value=(undefined===name ? '' : item.name) )
       label(for='description') Description:
       input#description.form-control(type='text' placeholder='Item Description' name='description' required='true' value=(undefined===description ? '' : item.description))
-      label(for='category') Category:
-      input#category.form-control(type='text' placeholder='Category' name='category' required='true' value=(undefined===category ? '' : item.category))
+
+    div.form-group
+      label Category:
+      div
+        for category in category_list
+          div(style='display: inline; padding-right:10px;')
+            input.checkbox-input(type='checkbox', name='category', id=category._id, value=category._id, checked=category.checked )
+            label(for=category._id) #{category.name}
     div.form-group
       label(for='price') Price:
       input#price.form-control(type='text' placeholder='Item Price' name='price' value=(undefined===price ? '' : item.price) )

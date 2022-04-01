@@ -69,6 +69,18 @@ exports.item_create_get = function(req, res, next) {
 // Handle Item create on POST.
 exports.item_create_post = [
 
+    //convert categories to array
+
+    (req, res, next) => {
+        if(!(req.body.category instanceof Array)){
+            if(typeof req.body.category ==='undefined')
+            req.body.category = [];
+            else
+            req.body.category = new Array(req.body.category);
+        }
+        next();
+    },
+    
     //form validation
     body('name', 'Item name required').trim().isLength({ min: 1 }).escape(),
     body('description', 'Item description must not be empty. Please enter a desciption for this item.').trim().isLength({ min: 1 }).escape(),
@@ -90,35 +102,21 @@ exports.item_create_post = [
             stock: req.body.stock
         });
 
-        Category.find()
-            .populate('name')
-            .exec(function (err, list_categories) {
-                if (err) { return next(err); }
-                for (let i = 0; i < list_categories.length; i++) {
-                    if (req.body.category === list_categories[i].name) {
-                        //If the category entered in the form is already one of our preexisting categories, assign the corresponding id to the item category
-                        item.category = list_categories[i]._id
-                    } else {
-                        //Otherwise, create a new category
-                        newCategory = new Category({
-                            name: req.body.category
-                            
-                        })
-                        //And add its ID as a property to the item
-                        item.category = newCategory._id
-                    }
-                }
-            })
-
-
-
         if (!errors.isEmpty()) {
+            Category.find()
+                .populate('name')
+                .exec(function (err, list_categories) {
+                    if (err) { return next(err); }
 
+                    for (let i = 0; i < list_categories.length; i++) {
+                        if (book.category.indexOf(list_categories[i]._id) > -1) {
+                            list_categories[i].checked = 'true';
+                        }
+                    }
+                    res.render('item_form', { title: 'Create Item', category_list: list_categories, item: item, errors: errors.array() })
+                })
         } else {
             item.save(function (err) {
-                if (newCategory) {
-                    newCategory.save()
-                }
                 if (err) { return next(err); }
                 res.redirect(item.url);
             });
