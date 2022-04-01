@@ -1,6 +1,7 @@
 const Item = require('../models/item');
 const Category = require('../models/category');
 const async = require('async');
+const { body,validationResult } = require("express-validator");
 
 // Display list of all Categories.
 exports.category_list = function(req, res) {

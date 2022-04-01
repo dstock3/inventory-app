@@ -54,14 +54,20 @@ exports.item_list = function(req, res) {
 };
 
 // Display Item create form on GET.
-exports.item_create_get = function(req, res) {
-    res.send('NOT IMPLEMENTED: Item create GET');
+exports.item_create_get = function(req, res, next) {
+    Category.find()
+        .populate('name')
+        .exec(function (err, list_categories) {
+            if (err) { return next(err); }
+            // Successful, so render
+            res.render('item_form', { title: 'Create Item', category_list: list_categories })
+            });
 };
 
 // Handle Item create on POST.
-exports.item_create_post = function(req, res) {
-    res.send('NOT IMPLEMENTED: Item create POST');
-};
+exports.item_create_post = [
+    
+];
 
 // Display Item delete form on GET.
 exports.item_delete_get = function(req, res) {
