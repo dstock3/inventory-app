@@ -8,12 +8,4 @@ block content
         p #{item.stock}
         a(href=item.category.url) #{item.category.name}
 
-block sidebar
-  div(class="sidebar")
-    h3(class="cat-header") Categories
-    ul
-      each cat in category_list
-        li(class="cat-line-item") 
-          a(href=cat.url class="cat-anchor") #{cat.name}
-
         

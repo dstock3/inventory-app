@@ -9,7 +9,12 @@ html
       div(class="logo")
       h1(class="title") Track Your Products!
     main
-      block sidebar
+      div(class="sidebar")
+        h3(class="cat-header") Categories
+        ul
+          each cat in category_list
+            li(class="cat-line-item") 
+              a(href=cat.url class="cat-anchor") #{cat.name}
       block content
     footer
       div(class="attribution")

@@ -79,54 +79,49 @@ exports.item_create_post = [
     (req, res, next) => {
         const errors = validationResult(req);
 
+        let newCategory = false;
+
         //create new Item object with the trimmed form data
         let item = new Item({ 
             name: req.body.name,
             description: req.body.description,
+            category: req.body.category,
             price: req.body.price,
             stock: req.body.stock
         });
 
+        Category.find()
+            .populate('name')
+            .exec(function (err, list_categories) {
+                if (err) { return next(err); }
+                for (let i = 0; i < list_categories.length; i++) {
+                    if (req.body.category === list_categories[i].name) {
+                        //If the category entered in the form is already one of our preexisting categories, assign the corresponding id to the item category
+                        item.category = list_categories[i]._id
+                    } else {
+                        //Otherwise, create a new category
+                        newCategory = new Category({
+                            name: req.body.category
+                            
+                        })
+                        //And add its ID as a property to the item
+                        item.category = newCategory._id
+                    }
+                }
+            })
+
+
+
         if (!errors.isEmpty()) {
 
         } else {
-            Category.find()
-                .populate('name')
-                .exec(function (err, list_categories) {
-                    if (err) { return next(err); }
-                    for (let i = 0; i < list_categories.length; i++) {
-                        if (req.body.category === list_categories[i].name) {
-                            //If the category entered in the form is already one of our preexisting categories, assign the corresponding id to the item category
-                            item.category = list_categories[i]._id
-
-                            item.save(function (err) {
-                                if (err) { return next(err); }
-                                res.redirect(item.url);
-                            });
-
-                        } else {
-                            /*
-                            //Otherwise, create a new category
-                            let newCategory = new Category({
-                                name: req.body.category
-                            })
-                            //And add its ID as a property to the item
-                            item.category = newCategory._id
-
-                            item.save(function (err) {
-                                newCategory.save(function (err) {
-                                    if (err) { return next(err); }
-                                    res.redirect(item.url);
-
-                                })
-
-                            });
-                            */
-
-                        }
-                    }
-
-                })
+            item.save(function (err) {
+                if (newCategory) {
+                    newCategory.save()
+                }
+                if (err) { return next(err); }
+                res.redirect(item.url);
+            });
         }
     }
 ];
