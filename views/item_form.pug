@@ -1,6 +1,25 @@
 extends layout
 
 block content
+  form(method='POST' action='')
+    h2 #{title}
+    div.form-group
+      label(for='name') Item Name:
+      input#name.form-control(type='text' placeholder='Item Name' name='name' required='true' value=(undefined===name ? '' : item.name) )
+      label(for='description') Description:
+      input#description.form-control(type='text' placeholder='Item Description' name='description' required='true' value=(undefined===description ? '' : item.description))
+      label(for='category') Category:
+      input#category.form-control(type='text' placeholder='Category' name='category' required='true' value=(undefined===category ? '' : item.category))
+    div.form-group
+      label(for='price') Price:
+      input#price.form-control(type='text' placeholder='Item Price' name='price' value=(undefined===price ? '' : item.price) )
+      label(for='stock') Inventory Amount:
+      input#stock.form-control(type='text' placeholder='Amount In Stock' name='stock' required='true' value=(undefined===stock ? '' : item.stock) )
+    button.btn.btn-primary(type='submit') Submit
+  if errors
+    ul
+      for error in errors
+        li!= error.msg
 
 block sidebar
   div(class="sidebar")

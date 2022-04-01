@@ -1,6 +1,8 @@
 const Item = require('../models/item');
 const Category = require('../models/category');
 const async = require('async');
+const { body,validationResult } = require("express-validator");
+const item = require('../models/item');
 
 exports.index = function(req, res, next) {
     async.parallel({
@@ -66,24 +68,13 @@ exports.item_create_get = function(req, res, next) {
 
 // Handle Item create on POST.
 exports.item_create_post = [
-    //convert the category into an array
-
-    (req, res, next) => {
-        if(!(req.body.category instanceof Array)){
-            if(typeof req.body.category ==='undefined')
-            req.body.category = [];
-            else
-            req.body.category = new Array(req.body.category);
-        }
-        next();
-    },
 
     //form validation
     body('name', 'Item name required').trim().isLength({ min: 1 }).escape(),
     body('description', 'Item description must not be empty. Please enter a desciption for this item.').trim().isLength({ min: 1 }).escape(),
     body('price', 'Item price must not be empty. Please enter the retail price of this item.').trim().isLength({ min: 1 }).escape(),
     body('stock', 'Item amount must not be empty. Please enter the amount of this item in your inventory.').trim().isLength({ min: 1 }).escape(),
-    body('category.*').escape(),
+    body('category', 'Item category must not be empty.').trim().isLength({ min: 1 }).escape(),
 
     (req, res, next) => {
         const errors = validationResult(req);
@@ -92,30 +83,50 @@ exports.item_create_post = [
         let item = new Item({ 
             name: req.body.name,
             description: req.body.description,
-            category: req.body.category,
             price: req.body.price,
             stock: req.body.stock
         });
 
         if (!errors.isEmpty()) {
-            Category.find()
-            .populate('name')
-            .exec(function (err, list_categories) {
-                if (err) { return next(err); }
-                for (let i = 0; i < list_categories.length; i++) {
-                    if (item.category.indexOf(list_categories[i]._id) > -1) {
-                        list_categories[i].checked='true';
-                    }
-                }
-                // Successful, so render
-                res.render('item_form', { title: 'Create Item', category_list: list_categories })
-                });
 
         } else {
-            item.save(function (err) {
-                if (err) { return next(err); }
-                res.redirect(item.url);
-            });
+            Category.find()
+                .populate('name')
+                .exec(function (err, list_categories) {
+                    if (err) { return next(err); }
+                    for (let i = 0; i < list_categories.length; i++) {
+                        if (req.body.category === list_categories[i].name) {
+                            //If the category entered in the form is already one of our preexisting categories, assign the corresponding id to the item category
+                            item.category = list_categories[i]._id
+
+                            item.save(function (err) {
+                                if (err) { return next(err); }
+                                res.redirect(item.url);
+                            });
+
+                        } else {
+                            /*
+                            //Otherwise, create a new category
+                            let newCategory = new Category({
+                                name: req.body.category
+                            })
+                            //And add its ID as a property to the item
+                            item.category = newCategory._id
+
+                            item.save(function (err) {
+                                newCategory.save(function (err) {
+                                    if (err) { return next(err); }
+                                    res.redirect(item.url);
+
+                                })
+
+                            });
+                            */
+
+                        }
+                    }
+
+                })
         }
     }
 ];

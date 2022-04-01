@@ -52,20 +52,25 @@ function itemCreate(name, desc, cat, price, stock, cb) {
 }
 
 function createCategories(cb) {
-  async.parallel([
+  async.series([
       function(callback) {
+        //0
         categoryCreate("Fresh Fruit", callback);
       },
       function(callback) {
+        //1
         categoryCreate("Dairy & Eggs", callback);
       },
       function(callback) {
+        //2
         categoryCreate("Meat & Seafood", callback);
       },
       function(callback) {
+        //3
         categoryCreate("Beverages", callback);
       },
       function(callback) {
+        //4
         categoryCreate("Frozen", callback);
       },
       ],
@@ -74,63 +79,70 @@ function createCategories(cb) {
 }
 
 
+
 /* (name, desc, cat, price, stock, cb) */
 
 function createItems(cb) {
+    let Fruit = categories[0]
+    let Dairy = categories[1]
+    let Meat = categories[2]
+    let Beverages = categories[3]
+    let Frozen = categories[4]
+
     async.series([
         function(callback) {
-          itemCreate('Blueberries Package', '1 pint container', categories[0], 4.09, 48, callback);
+          itemCreate('Blueberries Package', '1 pint container', Fruit, 4.09, 48, callback);
         },
         function(callback) {
-          itemCreate('Deli Sliced Mild Cheddar Cheese', '8 oz', categories[1], 2.35, 55, callback);
+          itemCreate('Deli Sliced Mild Cheddar Cheese', '8 oz', Dairy, 2.35, 55, callback);
         },
         function(callback) {
-          itemCreate('Grade A Large Eggs', '1 pint container', categories[1], 1.69, 75, callback);
+          itemCreate('Grade A Large Eggs', '1 pint container', Dairy, 1.69, 75, callback);
         },
         function(callback) {
-          itemCreate('Green Grapes', '1 lb bunch', categories[0], 2.19, 36, callback);
+          itemCreate('Green Grapes', '1 lb bunch', Fruit, 2.19, 36, callback);
         },
         function(callback) {
-          itemCreate('Orange Juice', '59 fl oz', categories[3], 2.45, 12, callback);
+          itemCreate('Orange Juice', '59 fl oz', Beverages, 2.45, 12, callback);
         },
         function(callback) {
-          itemCreate('1% Milk', '1 gal', categories[3], 2.75, 57, callback);
+          itemCreate('1% Milk', '1 gal', Dairy, 2.75, 57, callback);
         },
         function(callback) {
-          itemCreate('Ginger Beer', '12 fl oz', categories[3], 3.55, 7, callback);
+          itemCreate('Ginger Beer', '12 fl oz', Beverages, 3.55, 7, callback);
         },
         function(callback) {
-          itemCreate('Fresh Chicken Breasts', 'per lb', categories[2], 8.27, 15, callback);
+          itemCreate('Fresh Chicken Breasts', 'per lb', Meat, 8.27, 15, callback);
         },
         function(callback) {
-          itemCreate('85% Ground Beef', 'per lb', categories[2], 11.77, 19, callback);
+          itemCreate('85% Ground Beef', 'per lb', Meat, 11.77, 19, callback);
         },
         function(callback) {
-          itemCreate('Turkey Bacon', '12 oz', categories[2], 2.75, 4, callback);
+          itemCreate('Turkey Bacon', '12 oz', Meat, 2.75, 4, callback);
         },
         function(callback) {
-          itemCreate('Drumstick Dairy Dessert', '8 ct', categories[4], 7.15, 14, callback);
+          itemCreate('Drumstick Dairy Dessert', '8 ct', Frozen, 7.15, 14, callback);
         },
         function(callback) {
-          itemCreate('Tamales, Pork in Red Sauce', '24 oz', categories[4], 8.25, 28, callback);
+          itemCreate('Tamales, Pork in Red Sauce', '24 oz', Frozen, 8.25, 28, callback);
         },
         function(callback) {
-          itemCreate('Three Meat Pizza Rising Crust', '29.8 oz', categories[4], 3.29, 53, callback);
+          itemCreate('Three Meat Pizza Rising Crust', '29.8 oz', Frozen, 3.29, 53, callback);
         },
         function(callback) {
-          itemCreate('Tracks Ice Cream', '48 fl oz', categories[4], 2.15, 3, callback);
+          itemCreate('Moose Tracks Ice Cream', '48 fl oz', Frozen, 2.15, 3, callback);
         },
         function(callback) {
-          itemCreate('Nonfat Plain Greek Yogurt', '32 oz', categories[1], 3.75, 18, callback);
+          itemCreate('Nonfat Plain Greek Yogurt', '32 oz', Dairy, 3.75, 18, callback);
         },
         function(callback) {
-          itemCreate('Kombucha', '16 fl oz', categories[3], 2.75, 5, callback);
+          itemCreate('Kombucha', '16 fl oz', Beverages, 2.75, 5, callback);
         },
         function(callback) {
-          itemCreate('Avocado', 'per lb', categories[0], 1.25, 65, callback);
+          itemCreate('Avocado', 'per lb', Fruit, 1.25, 65, callback);
         },
         function(callback) {
-          itemCreate('93% Ground Beef', 'per lb', categories[2], 6.95, 18, callback);
+          itemCreate('93% Ground Beef', 'per lb', Meat, 6.95, 18, callback);
         },
         ],
         // optional callback
@@ -141,6 +153,13 @@ async.series([
   createCategories,
   createItems
 ],
+
+function() {
+  for (let i = 0; i < categories.length; i++) {
+    console.log(categories[i].name + " " + i)
+  }
+},
+
 // Optional callback
 function(err, results) {
     if (err) {
