@@ -7,6 +7,7 @@ html
   body
     header
       div(class="logo")
+        a(href="/products") Home
       h1(class="title") Track Your Products!
     main
       div(class="sidebar")
@@ -15,6 +16,10 @@ html
           each cat in category_list
             li(class="cat-line-item") 
               a(href=cat.url class="cat-anchor") #{cat.name}
+        h3(class="cat-header") Control Panel
+        ul
+          li
+            a(href="/products/item/create/" class="cat-anchor") Create New Item
       block content
     footer
       div(class="attribution")
