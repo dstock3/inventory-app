@@ -50,11 +50,6 @@ exports.item_detail = function(req, res, next) {
     })
 };
 
-// Display list of all Items.
-exports.item_list = function(req, res) {
-
-};
-
 // Display Item create form on GET.
 exports.item_create_get = function(req, res, next) {
     Category.find()
