@@ -16,5 +16,8 @@ block content
                     if item.stock < 10
                         span Running Low
                     p #{item.category.name}
+                    a(href=item.url + "/update") Update Item
+                    a(href=item.url + "/delete") Delete Item
+                    
 
                 

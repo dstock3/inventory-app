@@ -126,7 +126,28 @@ exports.item_create_post = [
 
 // Display Item delete form on GET.
 exports.item_delete_get = function(req, res) {
-    res.send('NOT IMPLEMENTED: Item delete GET');
+    async.parallel({
+        item: function(callback) {
+            Item.findById(req.params.id, 'name description category price stock')
+                .populate('name')
+                .populate('description')
+                .populate('category')
+                .populate('price')
+                .populate('stock')
+                .exec(callback)
+        },
+        category: function(callback) {
+            Category.find({ 'category': req.params.id },'name')
+                .exec(callback)
+        }
+    }, function(err, results) {
+        if (err) { return next(err); }
+        if (results.item==null) { // No results.
+            res.redirect('/products');
+        }
+        // Successful, so render.
+        res.render('item_delete', { title: 'Delete Item', item: results.item, category_list: results.category } );
+    });
 };
 
 // Handle Item delete on POST.
