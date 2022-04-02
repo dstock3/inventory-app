@@ -35,18 +35,22 @@ main {
   text-align: center;
 }
 
-.cat-header {
+.dec-line {
+  border-bottom: 2px solid black;
+}
+
+.cat-header, .control-header {
   margin-top: 15px;
   margin-bottom: 15px;
   font-size: 1.5em;
 }
 
-.cat-line-item {
+.cat-line-item, .control-line-item {
   font-size: 1.25em;
   margin-bottom: 15px;
 }
 
-.cat-anchor {
+.cat-anchor, .control-anchor  {
   text-decoration: none;
 }
 
