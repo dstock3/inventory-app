@@ -125,7 +125,7 @@ exports.item_create_post = [
 ];
 
 // Display Item delete form on GET.
-exports.item_delete_get = function(req, res) {
+exports.item_delete_get = function(req, res, next) {
     async.parallel({
         item: function(callback) {
             Item.findById(req.params.id, 'name description category price stock')
@@ -151,8 +151,20 @@ exports.item_delete_get = function(req, res) {
 };
 
 // Handle Item delete on POST.
-exports.item_delete_post = function(req, res) {
-    res.send('NOT IMPLEMENTED: Item delete POST');
+exports.item_delete_post = function(req, res, next) {
+    Item.findById(req.body.itemid)
+        .exec(function(err, results) {
+            if (err) { return next(err); }
+            // Success
+            else {
+                // Delete item and redirect to the list of items.
+                Item.findByIdAndRemove(req.body.itemid, function deleteItem (err) {
+                    if (err) { return next(err); }
+                    // Success - go to item list
+                    res.redirect('/products')
+                })
+            }
+    })
 };
 
 // Display Item update form on GET.
