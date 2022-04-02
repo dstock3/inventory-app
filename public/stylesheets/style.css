@@ -85,6 +85,25 @@ main {
   justify-content: space-between;
 }
 
+.item-detail-container {
+  width: 300px;
+  border: solid black 2px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+}
+
+.item-detail-container h2, p, a {
+  margin-bottom: 15px;
+  margin-left: 5px;
+
+}
+
+.item-head {
+  font-size: 1.5em;
+  margin-top: 15px;
+}
+
 footer {
   border-top: 2px solid black;
   position: relative;
