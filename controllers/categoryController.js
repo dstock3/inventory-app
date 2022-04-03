@@ -98,8 +98,7 @@ exports.category_delete_get = function(req, res) {
         let matchingItems = []
         for (let i = 0; i < results.list_items.length; i++) {
             if (results.list_items[i].category.name === results.category.name) {
-                matchingItems.push(results.list_items[i].name)
-                console.log(matchingItems)
+                matchingItems.push(results.list_items[i])
             }
         }
         res.render('category_delete.pug', { title: 'Delete Category', category: results.category, category_list: results.list_categories, items: matchingItems })

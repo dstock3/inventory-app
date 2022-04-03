@@ -10,7 +10,8 @@ block content
             p(class="warning") You must delete the following items before deleting this category.
             ul
                 for item in items
-                    li #{item}
+                    li 
+                        a(href=item.url) #{item.name}
         else 
             form(method='POST' action='')
                 div.form-group
