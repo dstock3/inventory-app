@@ -3,6 +3,7 @@ extends layout
 block content
     div(class="main-subcontainer")
         h2 #{title}
+        a(href=cat_url + "/delete") Delete Category
         ul(class="item-list")
         each item in item_list
             if title === item.category.name
@@ -18,6 +19,7 @@ block content
                     p #{item.category.name}
                     a(href=item.url + "/update") Update Item
                     a(href=item.url + "/delete") Delete Item
+        
                     
 
                 
