@@ -37,14 +37,43 @@ exports.category_detail = function(req, res) {
 };
 
 // Display Category create form on GET.
-exports.category_create_get = function(req, res) {
-    res.send('NOT IMPLEMENTED: Category create GET');
+exports.category_create_get = function(req, res, next) {
+    Category.find()
+        .populate('name')
+        .exec(function (err, list_categories) {
+            if (err) { return next(err); }
+            // Successful, so render
+            res.render('category_form', { title: 'Create Category', category_list: list_categories })
+            });
 };
 
 // Handle Category create on POST.
-exports.category_create_post = function(req, res) {
-    res.send('NOT IMPLEMENTED: Category create POST');
-};
+exports.category_create_post = [
+    body('name', 'Category name required').trim().isLength({ min: 1 }).escape(),
+
+    (req, res, next) => {
+        const errors = validationResult(req);
+
+        //create new Item object with the trimmed form data
+        let category = new Category({ 
+            name: req.body.name,
+        });
+
+        if (!errors.isEmpty()) {
+            Category.find()
+                .populate('name')
+                .exec(function (err, list_categories) {
+                    if (err) { return next(err); }
+                    res.render('category_form', { title: 'Create Category', category_list: list_categories })
+                })
+        } else {
+            category.save(function (err) {
+                if (err) { return next(err); }
+                res.redirect(category.url);
+            });
+        }
+    }
+];
 
 // Display Category delete form on GET.
 exports.category_delete_get = function(req, res) {

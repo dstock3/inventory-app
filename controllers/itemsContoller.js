@@ -85,8 +85,6 @@ exports.item_create_post = [
     (req, res, next) => {
         const errors = validationResult(req);
 
-        let newCategory = false;
-
         //create new Item object with the trimmed form data
         let item = new Item({ 
             name: req.body.name,
