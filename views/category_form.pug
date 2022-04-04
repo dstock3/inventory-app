@@ -3,6 +3,14 @@ extends layout
 block content
   form(method='POST' action='')
     h2 #{title}
+
+    if items
+        p(class="warning") The following items will be updated.
+        ul
+        for item in items
+            li 
+                a(href=item.url) #{item.name}
+
     div.form-group
         label(for='name') Category Name:
         input#name.form-control(type='text' placeholder='Category Name' name='name' required='true' value=(undefined===name ? '' : category.name) )

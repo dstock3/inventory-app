@@ -176,14 +176,14 @@ exports.item_update_get = function(req, res, next) {
                 .exec(callback)
         }
     }, function(err, results) {
-        if (err) { return next(err); }
-        if (results.item==null) { // No results.
-            var err = new Error('Item not found');
-            err.status = 404;
-            return next(err);
-        }
-        // Success
-        res.render('item_form', { title: 'Update Item', item: results.item, category_list: results.category });
+            if (err) { return next(err); }
+            if (results.item==null) { // No results.
+                var err = new Error('Item not found');
+                err.status = 404;
+                return next(err);
+            }
+            // Success
+            res.render('item_form', { title: 'Update Item', item: results.item, category_list: results.category });
     })
 };
 
