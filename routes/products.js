@@ -54,7 +54,4 @@ router.post('/category/:id/update', category_controller.category_update_post);
 // GET request for one Category.
 router.get('/category/:id', category_controller.category_detail);
 
-// GET request for list of all Categories.
-router.get('/categories', category_controller.category_list);
-
 module.exports = router;

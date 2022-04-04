@@ -4,6 +4,7 @@ block content
     div(class="main-subcontainer")
         h2 #{title}
         a(href=cat_url + "/delete") Delete Category
+        a(href=cat_url + "/update") Update Category
         ul(class="item-list")
         each item in item_list
             if title === item.category.name
