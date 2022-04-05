@@ -2,21 +2,23 @@ extends layout
 
 block content
     div(class="item-form-container")
-        form(method='POST' action='' enctype="multipart/form-data")
+        form(method='POST' action='' class="cat-form")
             h2(class="form-title") #{title}
 
-            if items
-                p(class="warning") The following items will be updated.
-                ul
-                for item in items
-                    li 
-                        a(href=item.url) #{item.name}
-
-            div.form-group
-                label(for='name') Category Name:
-                input#name.form-control(type='text' placeholder='Category Name' name='name' required='true' value=(undefined===name ? '' : category.name) )
-            button.btn.btn-primary(class="submit-btn" type='submit') Submit
-            if errors
-                ul
-                    for error in errors
-                        li!= error.msg
+            div(class="form-container")
+                if items
+                    p(class="warning") The following items will be updated.
+                    ul
+                    for item in items
+                        li 
+                            a(href=item.url) #{item.name}
+                div(class="form-main-subcontainer")
+                    div.form-group
+                        div(class="item-form-subcontainer")
+                            label(for='name') Category Name:
+                            input#name.form-control(type='text' placeholder='Category Name' name='name' required='true' value=(undefined===name ? '' : category.name) )
+                button(class="submit-btn" type='submit') Submit
+                    if errors
+                        ul
+                            for error in errors
+                                li!= error.msg
