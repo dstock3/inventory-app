@@ -14,7 +14,7 @@ header {
 }
 
 .logo {
-  margin-left: 10%;
+  margin-left: 5%;
 }
 
 form {
@@ -212,6 +212,14 @@ main {
   margin-top: 15px;
   margin-bottom: 15px;
   border-radius: 10px;
+}
+
+.item-link-container {
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  width: 75%;
+
 }
 
 footer {
