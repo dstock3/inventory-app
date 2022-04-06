@@ -115,7 +115,7 @@ main {
 .main-subcontainer {
   display: flex;
   flex-direction: column;
-  width: 80%;
+  width: 85%;
   align-items: center;
 }
 
@@ -214,12 +214,34 @@ main {
   border-radius: 10px;
 }
 
+.link-container a {
+  text-decoration: none;
+  margin-bottom: unset;
+
+}
+
 .item-link-container {
-  margin: auto;
   display: flex;
   justify-content: space-between;
   width: 75%;
 
+}
+
+.item-link-container a {
+  text-decoration: none;
+}
+
+.item-cat-container {
+  display: flex;
+}
+
+.warning {
+  background-color:rgb(255, 143, 143);
+  border: 2px solid red;
+  font-weight: bold;
+  height: 25px;
+  display: flex;
+  align-items: center;
 }
 
 footer {
