@@ -15,7 +15,8 @@ block content
             p #{item.description}
             p Amount Remaining: #{item.stock}
             if item.stock < 10
-                div(class="warning") Running Low
+              div(class="warning") 
+                  span Running Low
             div(class="item-cat-container")
               span Category: 
               a(href=item.category.url) #{item.category.name}

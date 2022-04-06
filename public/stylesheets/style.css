@@ -2,6 +2,9 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  background-color:white;
+  color:rgb(18, 18, 18);
+  font-family:Arial, Helvetica, sans-serif;
 }
 
 header {
@@ -10,7 +13,7 @@ header {
   align-items: center;
   height: 100px;
   width: 100vw;
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid rgb(122, 174, 246);
 }
 
 .logo {
@@ -18,10 +21,16 @@ header {
 }
 
 form {
-  border: 2px solid black;
+  border: 2px solid rgb(122, 174, 246);
   border-radius: 15px;
   width: fit-content;
   padding: 10px; 
+}
+
+a {
+  text-decoration: none;
+  color: rgb(170, 0, 255);
+  font-weight: bold;
 }
 
 .item-form-container {
@@ -73,7 +82,7 @@ label {
   display: flex;
   justify-content: space-around;
   width: 70%;
-  border: 1px solid black;
+  border: 1px solid rgb(122, 174, 246);
   padding-inline: 15px;
   padding-top: 15px;
   border-radius: 15px;
@@ -82,7 +91,7 @@ label {
 
 .dec-form-line {
   width: 100%;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid rgb(122, 174, 246);
   margin-bottom: 15px;
 }
 
@@ -123,13 +132,19 @@ main {
   margin-right: 15px;
   width: 15%;
   height: fit-content;
-  border: 2px solid black;
+  border: 2px solid rgb(122, 174, 246);
   border-radius: 15px;
   text-align: center;
 }
 
+.cat-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .dec-line {
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid rgb(122, 174, 246);
 }
 
 .cat-header, .control-header {
@@ -139,12 +154,35 @@ main {
 }
 
 .cat-line-item, .control-line-item {
-  font-size: 1.25em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
+  font-size: 1.10em;
   margin-bottom: 15px;
+  width: 70%;
+  height: 25px;
 }
 
 .cat-anchor, .control-anchor  {
-  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.selected {
+  background-color: rgb(72, 144, 245);
+}
+
+.selected a {
+  color: white;
+
+}
+
+.control-panel-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .title {
@@ -167,7 +205,7 @@ main {
   width: 250px;
   height: 250px;
   padding: 15px;
-  border: 2px solid black;
+  border: 2px solid rgb(122, 174, 246);
   border-radius: 15px;
   margin-bottom: 15px;
   margin-right: 15px;
@@ -180,13 +218,13 @@ main {
 
 .item-detail-container {
   width: 300px;
-  border: solid black 2px;
+  border: solid rgb(122, 174, 246) 2px;
   display: flex;
   flex-direction: column;
   border-radius: 5px;
 }
 
-.item-detail-container h2, p, a {
+.item-detail-container h2, p {
   margin-bottom: 15px;
   margin-left: 5px;
 }
@@ -208,16 +246,14 @@ main {
   justify-content: space-between;
   height: 55px;
   width: fit-content;
-  border: 2px solid black;
+  border: 2px solid rgb(122, 174, 246);
   margin-top: 15px;
   margin-bottom: 15px;
   border-radius: 10px;
 }
 
 .link-container a {
-  text-decoration: none;
   margin-bottom: unset;
-
 }
 
 .item-link-container {
@@ -227,10 +263,6 @@ main {
 
 }
 
-.item-link-container a {
-  text-decoration: none;
-}
-
 .item-cat-container {
   display: flex;
 }
@@ -238,14 +270,20 @@ main {
 .warning {
   background-color:rgb(255, 143, 143);
   border: 2px solid red;
+  border-radius: 15px;
+  color: black;
   font-weight: bold;
   height: 25px;
   display: flex;
   align-items: center;
 }
 
+.warning span {
+  margin-left: 15px;
+}
+
 footer {
-  border-top: 2px solid black;
+  border-top: 2px solid rgb(122, 174, 246);
   display: flex;
   flex-direction: column;
   align-items: center;

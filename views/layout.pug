@@ -12,17 +12,29 @@ html
     main
       div(class="sidebar")
         h3(class="cat-header") Categories
-        ul
+        ul(class="cat-list")
           each cat in category_list
-            li(class="cat-line-item") 
-              a(href=cat.url class="cat-anchor") #{cat.name}
+            if cat.name === thisCat
+              li(class="cat-line-item selected") 
+                a(href=cat.url class="cat-anchor") #{cat.name}
+            else 
+              li(class="cat-line-item") 
+                a(href=cat.url class="cat-anchor") #{cat.name}
         div(class="dec-line")
         h3(class="control-header") Control Panel
         ul(class="control-panel-list")
-          li(class="control-line-item")
-            a(href="/products/item/create/" class="control-anchor") Create New Item
-          li(class="control-line-item")
-            a(href="/products/category/create/" class="control-anchor") Create New Category
+          if title === "Create Item"
+            li(class="control-line-item selected")
+              a(href="/products/item/create/" class="control-anchor") Create New Item
+          else 
+            li(class="control-line-item")
+              a(href="/products/item/create/" class="control-anchor") Create New Item
+          if title === "Create Category"
+            li(class="control-line-item selected")
+              a(href="/products/category/create/" class="control-anchor") Create New Category
+          else
+            li(class="control-line-item")
+              a(href="/products/category/create/" class="control-anchor") Create New Category
       block content
     footer
       div(class="attribution")
