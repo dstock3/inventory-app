@@ -17,12 +17,13 @@ exports.category_detail = function(req, res) {
                 .exec(callback)
         },
         list_items: function(callback) {
-            Item.find({}, 'name description category price stock')
+            Item.find({}, 'name description category price stock image')
                 .populate('name')
                 .populate('description')
                 .populate('category')
                 .populate('price')
                 .populate('stock')
+                .populate('image')
                 .exec(callback)
         }
     }, function(err, results) {

@@ -1,5 +1,19 @@
 const express = require('express');
 const router = express.Router();
+const multer  = require('multer')
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, './public/images')
+  },
+
+  filename: (req, file, cb) => {
+    console.log(file)
+    cb(null,  file.originalname)
+  }
+})
+
+const upload = multer({ storage: storage })
 
 //Controller Module
 const items_controller = require('../controllers/itemsContoller')
@@ -14,7 +28,7 @@ router.get('/', items_controller.index);
 router.get('/item/create', items_controller.item_create_get);
 
 // POST request for creating item.
-router.post('/item/create', items_controller.item_create_post);
+router.post('/item/create', upload.single('image'), items_controller.item_create_post);
 
 // GET request to delete item.
 router.get('/item/:id/delete', items_controller.item_delete_get);
@@ -26,7 +40,7 @@ router.post('/item/:id/delete', items_controller.item_delete_post);
 router.get('/item/:id/update', items_controller.item_update_get);
 
 // POST request to update item.
-router.post('/item/:id/update', items_controller.item_update_post);
+router.post('/item/:id/update', upload.single('image'), items_controller.item_update_post);
 
 // GET request for one item.
 router.get('/item/:id', items_controller.item_detail);

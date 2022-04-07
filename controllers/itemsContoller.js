@@ -6,12 +6,13 @@ const { body,validationResult } = require("express-validator");
 exports.index = function(req, res, next) {
     async.parallel({
         list_items: function(callback) {
-            Item.find({}, 'name description category price stock')
+            Item.find({}, 'name description category price stock image')
             .populate('name')
             .populate('description')
             .populate('category')
             .populate('price')
             .populate('stock')
+            .populate('image')
             .exec(callback)
 
         },
@@ -31,12 +32,13 @@ exports.index = function(req, res, next) {
 exports.item_detail = function(req, res, next) {
     async.parallel({
         item: function(callback) {
-            Item.findById(req.params.id, 'name description category price stock')
+            Item.findById(req.params.id, 'name description category price stock image')
                 .populate('name')
                 .populate('description')
                 .populate('category')
                 .populate('price')
                 .populate('stock')
+                .populate('image')
                 .exec(callback)
         },
         category: function(callback) {
@@ -91,7 +93,8 @@ exports.item_create_post = [
             description: req.body.description,
             category: req.body.category,
             price: req.body.price,
-            stock: req.body.stock
+            stock: req.body.stock,
+            image: req.file.originalname
         });
 
         if (!errors.isEmpty()) {
@@ -120,12 +123,13 @@ exports.item_create_post = [
 exports.item_delete_get = function(req, res, next) {
     async.parallel({
         item: function(callback) {
-            Item.findById(req.params.id, 'name description category price stock')
+            Item.findById(req.params.id, 'name description category price stock image')
                 .populate('name')
                 .populate('description')
                 .populate('category')
                 .populate('price')
                 .populate('stock')
+                .populate('image')
                 .exec(callback)
         },
         category: function(callback) {
@@ -163,12 +167,13 @@ exports.item_delete_post = function(req, res, next) {
 exports.item_update_get = function(req, res, next) {
     async.parallel({
         item: function(callback) {
-            Item.findById(req.params.id, 'name description category price stock')
+            Item.findById(req.params.id, 'name description category price stock image')
                 .populate('name')
                 .populate('description')
                 .populate('category')
                 .populate('price')
                 .populate('stock')
+                .populate('image')
                 .exec(callback)
         },
         category: function(callback) {
@@ -221,6 +226,7 @@ exports.item_update_post = [
             category: req.body.category,
             price: req.body.price,
             stock: req.body.stock,
+            image: req.body.originalname,
             _id:req.params.id //This is required, or a new ID will be assigned
         });
 

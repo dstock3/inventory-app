@@ -281,6 +281,10 @@ main {
   display: flex;
 }
 
+.item-cat-container span {
+  margin-right: 15px;
+}
+
 .warning {
   background-color:rgb(255, 143, 143);
   border: 2px solid red;

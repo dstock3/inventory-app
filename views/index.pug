@@ -11,7 +11,9 @@ block content
             div(class="main-item-container")
               h3 
                 a(href=item.url) #{item.name}
-              span Price: $#{item.price}  
+              span Price: $#{item.price}
+            if item.image 
+              img(class="item-pic" alt="pic of " + item.name src='/images/' + item.image)  
             p #{item.description}
             p Amount Remaining: #{item.stock}
             if item.stock < 10

@@ -9,6 +9,7 @@ const ItemSchema = new Schema(
         category:  {type: Schema.Types.ObjectId, ref: 'Category', required: true},
         price: {type: Number, required: true},
         stock: {type: Number, required: true},
+        image: {type: String, required: false}
     }
 )
 
