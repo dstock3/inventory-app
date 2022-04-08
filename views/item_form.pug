@@ -18,7 +18,7 @@ block content
               a(href=item.category.url) #{item.category.name}
               a(href=item.url + "/delete") Delete Item
         div(class="form-main-subcontainer")
-          div.form-group
+          div.form-group(class="form-group-item-name")
             div(class="item-form-subcontainer")
               label(for='name') Item Name:
               input#name.form-control(type='text' placeholder='Item Name' name='name' required='true' value=(undefined===name ? '' : item.name) )
@@ -26,7 +26,7 @@ block content
               label(for='description') Description:
               input#description.form-control(type='text' placeholder='Item Description' name='description' required='true' value=(undefined===description ? '' : item.description))
 
-          div.form-group
+          div.form-group(class="form-group-item-price")
             div(class="item-form-subcontainer")
               label(for='price') Price:
               input#price.form-control(type='text' placeholder='Item Price' name='price' value=(undefined===price ? '' : item.price) )
@@ -34,14 +34,15 @@ block content
               label(for='stock') Inventory Amount:
               input#stock.form-control(type='text' placeholder='Amount In Stock' name='stock' required='true' value=(undefined===stock ? '' : item.stock) )
         div(class="form-main-subcontainer")
-          div.form-group
+          div.form-group(class="form-group-item-cat")
             label(class="item-cat-label") Category:
             div(class="cat-checkbox-container")
               for category in category_list
                 div(class="cat-checkbox" style='display: inline; padding-right:10px;')
                   input.checkbox-input(type='checkbox', name='category', id=category._id, value=category._id, checked=category.checked )
                   label(for=category._id) #{category.name}
-          div.form-group
+          div.form-group(class="form-group-item-img-upload")
+            img(src="/images/upload.svg" class="upload-image")
             label(class="upload-image-label") Upload Image
             input(class="upload-image-input" type="file" name="image")
       button(class="submit-btn" type='submit') Submit

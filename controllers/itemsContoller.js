@@ -24,7 +24,7 @@ exports.index = function(req, res, next) {
     }, function(err, results) {
         if (err) { return next(err); } // Error in API usage.
         // Successful, so render.
-        res.render('index', { title: 'Products', item_list: results.list_items, category_list: results.list_categories } );
+        res.render('index', { title: 'Product Tracker', item_list: results.list_items, category_list: results.list_categories } );
     });
 };
 

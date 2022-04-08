@@ -16,7 +16,7 @@ block content
               div(class="item-img-container")
                 img(class="item-pic" alt="pic of " + item.name src='/images/' + item.image)  
             p #{item.description}
-            p Amount Remaining: #{item.stock}
+            p(class="stock") Amount Remaining: #{item.stock}
             if item.stock < 10
               div(class="warning") 
                   span Running Low
