@@ -25,6 +25,10 @@ header {
   margin-left: 5%;
 }
 
+.logo-img {
+  height: 25px;
+}
+
 form {
   border: 2px solid rgb(122, 174, 246);
   border-radius: 15px;
