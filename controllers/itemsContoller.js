@@ -226,7 +226,7 @@ exports.item_update_post = [
             category: req.body.category,
             price: req.body.price,
             stock: req.body.stock,
-            image: req.body.originalname,
+            image: req.file.originalname,
             _id:req.params.id //This is required, or a new ID will be assigned
         });
 

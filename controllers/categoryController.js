@@ -28,7 +28,14 @@ exports.category_detail = function(req, res) {
         }
     }, function(err, results) {
         if (err) { return next(err); }
-        res.render('category_detail', { title: results.category.name, cat_url: results.category.url, category_list: results.list_categories, item_list: results.list_items, thisCat: results.category.name })
+        let lowInv = []
+        for (let i = 0; i < results.list_items.length; i++) {
+            if (results.list_items[i].stock < 5 && results.list_items[i].category.name === results.category.name) {
+                lowInv.push(results.list_items[i])
+            }
+        }
+
+        res.render('category_detail', { title: results.category.name, cat_url: results.category.url, category_list: results.list_categories, item_list: results.list_items, thisCat: results.category.name, lowInv: lowInv })
     })
 };
 

@@ -4,8 +4,9 @@ block content
     div(class="main-subcontainer")
         div(class="item-detail-container")
             h2(class="item-head") #{item.name}
-            if item.image 
-                img(class="item-pic" alt="pic of " + item.name src='/images/' + item.image)
+            if item.image
+                div(class="item-img-container")
+                    img(class="item-pic" alt="pic of " + item.name src='/images/' + item.image)
             p #{item.description}
             p #{item.price}
             p #{item.stock}
