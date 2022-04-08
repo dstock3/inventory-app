@@ -166,6 +166,24 @@ main {
   box-shadow: 5px 5px 3px rgba(0, 13, 31, 0.218);
 }
 
+.dashboard {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 55%;
+  border: 3px solid rgb(122, 174, 246);
+  box-shadow: 5px 5px 3px rgba(0, 13, 31, 0.218);
+  margin-bottom: 15px;
+}
+
+.dash-inv {
+  margin-right: 15px;
+}
+
+.notif {
+  font-weight: bold;
+}
+
 .cat-list {
   display: flex;
   flex-direction: column;
@@ -276,16 +294,17 @@ main {
 .cat-detail-head {
   font-size: 1.5em;
   font-weight: bold;
+  margin-bottom: 15px;
 }
 
 .link-container {
   padding: 5px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-evenly;
   height: 55px;
   width: 300px;
-  border: 2px solid rgb(122, 174, 246);
+  border: 1px solid rgb(122, 174, 246);
   margin-top: 15px;
   margin-bottom: 15px;
   border-radius: 10px;
