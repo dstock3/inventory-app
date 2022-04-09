@@ -411,7 +411,7 @@ footer {
   }
 
   form {
-    width: 95%;
+    width: 85%;
   }
 
   .cat-checkbox-container {
@@ -438,6 +438,10 @@ footer {
 
   .cat-delete-container {
     width: 85%;
+  }
+
+  .confirm-delete-btn {
+    margin-top: 15px;
   }
 
   .cat-msg {
