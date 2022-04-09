@@ -5,7 +5,7 @@ block content
         h2(class="cat-detail-head") #{title}
         div(class="dashboard")
             if lowInv.length > 0
-                div(class="dash-inv")
+                div(class="dash-inv warning")
                     div(class="notif") Low Inventory: #{lowInv.length}
             div(class="link-container")
                 a(href=cat_url + "/update") Update Category
