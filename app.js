@@ -12,8 +12,7 @@ const app = express();
 
 //Set up mongoose connection
 const mongoose = require('mongoose');
-const dev_db_url = 'mongodb+srv://dstock:ihKNrn49hmsyuK41@cluster0.k9yut.mongodb.net/grocery_inventory?retryWrites=true&w=majority';
-const mongoDB = process.env.MONGODB_URI || dev_db_url;
+const mongoDB = 'mongodb+srv://dstock:ihKNrn49hmsyuK41@cluster0.k9yut.mongodb.net/grocery_inventory?retryWrites=true&w=majority';
 mongoose.connect(mongoDB, { useNewUrlParser: true , useUnifiedTopology: true});
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
