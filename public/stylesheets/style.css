@@ -285,7 +285,6 @@ main {
 
 .item-detail-container h2, p {
   margin-bottom: 15px;
-  margin-left: 5px;
 }
 
 .item-head {
@@ -466,6 +465,7 @@ footer {
   }
 
   .logo {
+    margin-top: 15px;
     margin-left: unset;
   }
 
