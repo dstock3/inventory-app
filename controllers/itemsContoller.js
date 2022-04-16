@@ -179,6 +179,9 @@ exports.item_update_get = function(req, res, next) {
         category: function(callback) {
             Category.find({ 'category': req.params.id },'name')
                 .exec(callback)
+        },
+        categories: function(callback) {
+            Category.find(callback);
         }
     }, function(err, results) {
             if (err) { return next(err); }
@@ -188,7 +191,13 @@ exports.item_update_get = function(req, res, next) {
                 return next(err);
             }
             // Success
-            res.render('item_form', { title: 'Update Item', item: results.item, category_list: results.category });
+            // Mark our selected categories as checked
+            for (let all_c_iter = 0; all_c_iter < results.categories.length; all_c_iter++) {          
+                if (results.categories[all_c_iter]._id.toString()===results.item.category._id.toString()) {
+                    results.categories[all_c_iter].checked='true';
+                }
+            }
+            res.render('item_form', { title: 'Update Item', item: results.item, categories: results.categories, category_list: results.category });
     })
 };
 
@@ -223,7 +232,7 @@ exports.item_update_post = [
         let item = new Item({ 
             name: req.body.name,
             description: req.body.description,
-            category: req.body.category,
+            category: (typeof req.body.category==='undefined') ? [] : req.body.category,
             price: req.body.price,
             stock: req.body.stock,
             image: req.file.originalname,
@@ -249,6 +258,7 @@ exports.item_update_post = [
             Item.findByIdAndUpdate(req.params.id, item, {}, function (err,thisitem) {
                 if (err) { return next(err); }
                    // Successful - redirect to item detail page.
+
                    res.redirect(thisitem.url);
                 });
         }

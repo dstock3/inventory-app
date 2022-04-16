@@ -13,7 +13,7 @@ block content
                   div(class="item-img-container")
                       img(class="item-pic" alt="pic of " + item.name src='/images/' + item.image)
               p #{item.description}
-              p #{item.price}
+              p $#{item.price}
               p #{item.stock}
               if item.stock < 10
                   div(class="warning") 
@@ -24,30 +24,30 @@ block content
           div.form-group(class="form-group-item-name")
             div(class="item-form-subcontainer")
               label(for='name') Item Name:
-              input#name.form-control(type='text' placeholder='Item Name' name='name' required='true' value=(undefined===name ? '' : item.name) )
+              input#name.form-control(type='text' placeholder='Item Name' name='name' required='true' value=(undefined===item ? '' : item.name) )
             div(class="item-form-subcontainer")
               label(for='description') Description:
-              input#description.form-control(type='text' placeholder='Item Description' name='description' required='true' value=(undefined===description ? '' : item.description))
+              input#description.form-control(type='text' placeholder='Item Description' name='description' required='true' value=(undefined===item ? '' : item.description))
 
           div.form-group(class="form-group-item-price")
             div(class="item-form-subcontainer")
               label(for='price') Price:
-              input#price.form-control(type='text' placeholder='Item Price' name='price' value=(undefined===price ? '' : item.price) )
+              input#price.form-control(type='text' placeholder='Item Price' name='price' value=(undefined===item ? '' : item.price) )
             div(class="item-form-subcontainer")
               label(for='stock') Inventory Amount:
-              input#stock.form-control(type='text' placeholder='Amount In Stock' name='stock' required='true' value=(undefined===stock ? '' : item.stock) )
+              input#stock.form-control(type='text' placeholder='Amount In Stock' name='stock' required='true' value=(undefined===item ? '' : item.stock) )
         div(class="form-main-subcontainer")
           div.form-group(class="form-group-item-cat")
             label(class="item-cat-label") Category:
             div(class="cat-checkbox-container")
-              for category in category_list
+              for category in categories
                 div(class="cat-checkbox" style='display: inline; padding-right:10px;')
                   input.checkbox-input(type='checkbox', name='category', id=category._id, value=category._id, checked=category.checked )
                   label(for=category._id) #{category.name}
           div.form-group(class="form-group-item-img-upload")
             img(src="/images/upload.svg" class="upload-image")
             label(class="upload-image-label") Upload Image
-            input(class="upload-image-input" type="file" name="image")
+            input(class="upload-image-input" type="file" name="image" value=(undefined===item ? '' : item.image))
       button(class="submit-btn" type='submit') Submit
     if errors
       ul
