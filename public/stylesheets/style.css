@@ -388,6 +388,14 @@ footer {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#e8f2f6",endColorstr="#ffffff",GradientType=1);
 }
 
+.image-prompt {
+  margin-top: 15px;
+}
+
+.image-filename {
+  font-weight: bold;
+}
+
 .attribution {
   margin-bottom: 15px;
 }

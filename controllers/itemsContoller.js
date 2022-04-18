@@ -225,19 +225,38 @@ exports.item_update_post = [
 
     (req, res, next) => {
 
+        let item
+        if (req.file) {
+            imageFilename = req.file.originalname
+
+            // Create an Item object with escaped/trimmed data and old id.
+            item = new Item({ 
+                name: req.body.name,
+                description: req.body.description,
+                category: (typeof req.body.category==='undefined') ? [] : req.body.category,
+                price: req.body.price,
+                stock: req.body.stock,
+                image: req.file.originalname,
+                _id:req.params.id //This is required, or a new ID will be assigned
+            });
+        } else {
+            item = new Item({ 
+                name: req.body.name,
+                description: req.body.description,
+                category: (typeof req.body.category==='undefined') ? [] : req.body.category,
+                price: req.body.price,
+                stock: req.body.stock,
+                _id:req.params.id
+            });
+
+        }
+
+        console.log(req.params)
+
         // Extract the validation errors from a request.
         const errors = validationResult(req);
 
-        // Create an Item object with escaped/trimmed data and old id.
-        let item = new Item({ 
-            name: req.body.name,
-            description: req.body.description,
-            category: (typeof req.body.category==='undefined') ? [] : req.body.category,
-            price: req.body.price,
-            stock: req.body.stock,
-            image: req.file.originalname,
-            _id:req.params.id //This is required, or a new ID will be assigned
-        });
+
 
         if (!errors.isEmpty()) {
             Category.find()

@@ -53,7 +53,13 @@ block content
           div.form-group(class="form-group-item-img-upload")
             img(src="/images/upload.svg" class="upload-image")
             label(class="upload-image-label") Upload Image
+            if title==="Update Item"
+              if item.image
+                div(class="image-prompt") There is already an image associated with this item: 
+                  span(class="image-filename") #{item.image}. 
+                  span Would you like to choose a new one?
             input#image.form-control(class="upload-image-input" type="file" name="image")
+
       button(class="submit-btn" type='submit') Submit
     if errors
       ul
