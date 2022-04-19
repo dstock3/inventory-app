@@ -5,8 +5,9 @@ block content
         h2(class="cat-detail-head") #{title}
         div(class="dashboard")
             if lowInv.length > 0
-                div(class="dash-inv warning")
-                    div(class="notif") Low Inventory: #{lowInv.length}
+                a(href="/products/low")
+                    div(class="dash-inv warning")
+                        div(class="notif") Low Inventory: #{lowInv.length}
             div(class="link-container")
                 a(href=cat_url + "/update") Update Category
                 a(href=cat_url + "/delete") Delete Category
@@ -24,8 +25,9 @@ block content
                         p Price: $#{item.price} 
                         p(class="stock") Amount Remaining: #{item.stock}
                         if item.stock < 10
-                            div(class="warning") 
-                                span Running Low
+                            a(href="/products/low")
+                                div(class="warning") 
+                                    span Running Low
                         div(class="item-cat-container")
                             span Category: 
                             a(href=item.category.url) #{item.category.name}

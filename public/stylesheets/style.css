@@ -358,6 +358,13 @@ main {
   font-weight: bold;
 }
 
+.low-inv-head {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
 .warning {
   background-color:rgb(255, 143, 143);
   border: 2px solid red;
@@ -367,6 +374,7 @@ main {
   height: 25px;
   display: flex;
   align-items: center;
+  margin-bottom: 15px;
 }
 
 .warning span {

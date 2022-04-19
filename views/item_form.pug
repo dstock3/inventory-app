@@ -16,8 +16,9 @@ block content
               p $#{item.price}
               p #{item.stock}
               if item.stock < 10
+                a(href="products/low")
                   div(class="warning") 
-                    span Running Low
+                      span Running Low
               a(href=item.category.url) #{item.category.name}
               a(href=item.url + "/delete") Delete Item
         div(class="form-main-subcontainer")
