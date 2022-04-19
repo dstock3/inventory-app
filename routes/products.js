@@ -67,4 +67,7 @@ router.post('/category/:id/update', category_controller.category_update_post);
 // GET request for one Category.
 router.get('/category/:id', category_controller.category_detail);
 
+// GET products home page.
+router.get('/low', items_controller.low_inv);
+
 module.exports = router;

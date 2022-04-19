@@ -256,8 +256,6 @@ exports.item_update_post = [
         // Extract the validation errors from a request.
         const errors = validationResult(req);
 
-
-
         if (!errors.isEmpty()) {
             Category.find()
                 .populate('name')
@@ -284,3 +282,35 @@ exports.item_update_post = [
     }
 
 ];
+
+//Get low inventory items
+exports.low_inv = function(req, res, next) {
+    async.parallel({
+        list_items: function(callback) {
+            Item.find({}, 'name description category price stock image')
+            .populate('name')
+            .populate('description')
+            .populate('category')
+            .populate('price')
+            .populate('stock')
+            .populate('image')
+            .exec(callback)
+
+        },
+        list_categories: function(callback) {
+            Category.find({}, 'name')
+            .populate('name')
+            .exec(callback)
+        },
+    }, function(err, results) {
+        if (err) { return next(err); } // Error in API usage.
+        // Successful, so render.
+        let lowInv = []
+        for (let i = 0; i < results.list_items.length; i++) {
+            if (results.list_items[i].stock < 10) {
+                lowInv.push(results.list_items[i])
+            }
+        }
+        res.render('low_inv', { title: 'Low Inventory', low_inv: lowInv, category_list: results.list_categories } );
+    });
+};

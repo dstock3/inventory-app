@@ -1,0 +1,29 @@
+extends layout
+
+block content
+  if error
+    p There was an error obtaining the requested information.
+  else
+    div(class="main-subcontainer")
+        ul(class="item-list")
+            each item in low_inv
+                li(class="line-item")
+                    div(class="main-item-container")
+                        h3 
+                            a(href=item.url) #{item.name}
+                    if item.image
+                        div(class="item-img-container")
+                        a(href=item.url)
+                            img(class="item-pic" alt="pic of " + item.name src='/images/' + item.image)  
+                    p #{item.description}
+                    p Price: $#{item.price} 
+                    p(class="stock") Amount Remaining: #{item.stock}
+                    if item.stock < 10
+                        div(class="warning") 
+                            span Running Low
+                    div(class="item-cat-container")
+                        span Category: 
+                        a(href=item.category.url) #{item.category.name}
+                    div(class="item-link-container")
+                        a(href=item.url + "/update") Update Item
+                        a(href=item.url + "/delete") Delete Item
