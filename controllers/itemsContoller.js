@@ -251,8 +251,6 @@ exports.item_update_post = [
 
         }
 
-        console.log(req.params)
-
         // Extract the validation errors from a request.
         const errors = validationResult(req);
 
