@@ -30,7 +30,7 @@ exports.category_detail = function(req, res) {
         if (err) { return next(err); }
         let lowInv = []
         for (let i = 0; i < results.list_items.length; i++) {
-            if (results.list_items[i].stock < 5 && results.list_items[i].category.name === results.category.name) {
+            if (results.list_items[i].stock < 10 && results.list_items[i].category.name === results.category.name) {
                 lowInv.push(results.list_items[i])
             }
         }
