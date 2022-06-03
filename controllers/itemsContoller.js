@@ -248,7 +248,6 @@ exports.item_update_post = [
                 stock: req.body.stock,
                 _id:req.params.id
             });
-
         }
 
         // Extract the validation errors from a request.
